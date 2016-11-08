@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Define all projects
 all_projects=(ingest parse/emojis parse/hashtags parse/urls storage/cassandra storage/kafka)
