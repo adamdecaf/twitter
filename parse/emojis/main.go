@@ -1,0 +1,5 @@
+package emojis
+
+func main() {
+
+}

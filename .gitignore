@@ -22,3 +22,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# custom
+bin/ingest-*
+bin/parse/*
+bin/storage/*
