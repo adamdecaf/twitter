@@ -7,9 +7,16 @@ import (
 	"time"
 )
 
-func parse(tweet anaconda.Tweet) (*twitter.Tweet, *twitter.User) {
-	t := parseTweetDetails(tweet)
-	u := parseUserDetails(tweet)
+func parse(item interface{}) (*twitter.Tweet, *twitter.User) {
+	var t *twitter.Tweet
+	var u *twitter.User
+
+	tweet, ok := item.(anaconda.Tweet)
+	if ok {
+		t = parseTweetDetails(tweet)
+		u = parseUserDetails(tweet)
+	}
+
 	return t, u
 }
 

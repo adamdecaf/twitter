@@ -1,9 +1,13 @@
 package ingest
 
 import (
-	"github.com/ChimeraCoder/anaconda"
+	"github.com/adamdecaf/twitter"
 	"log"
 	"os"
+)
+
+var (
+	DefaultStorageBatchSize = 100
 )
 
 func main() {
@@ -24,22 +28,26 @@ func main() {
 		os.Exit(1)
 	}
 
+	storage := NewKafkaStorage(nil) // todo
+	batch := make([]twitter.Tweet, 0, DefaultStorageBatchSize)
+
 	// Read off tweets forever, die if something panics.
-	// todo: leaks underlying twitter library
 	for {
 		item := <- client.Events
-		tweet, ok := item.(anaconda.Tweet)
-		if ok {
-			go parseAndStore(tweet)
+		t, _ := parse(item)
+
+		// Did we get a tweet?
+		if t != nil {
+			batch = append(batch, *t) // todo
 		}
-	}
-}
 
-func parseAndStore(tweet anaconda.Tweet) {
-	t, _ := parse(tweet)
-
-	// store tweet
-	if t != nil {
-		storeTweet(*t)
+		// Store tweets once we've got a batch inmem
+		if len(batch) >= DefaultStorageBatchSize {
+			err := storage.Store(batch)
+			if err != nil {
+				log.Println(err)
+			}
+			batch = nil
+		}
 	}
 }
