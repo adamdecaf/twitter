@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+// todo(adam): Versioning on these models?
+
 // `Tweet` represents the data we care about from tweets
 type Tweet struct {
 	Id string `json:"id"`
@@ -13,7 +15,7 @@ type Tweet struct {
 	CreatedAt time.Time `json:"createdAt"`
 }
 
-// todo
+// Serialize converts a tweet to json.
 func (t Tweet) Serialize() *[]byte {
 	b, err := json.Marshal(t)
 	if err != nil {
@@ -30,7 +32,7 @@ type User struct {
 	CreatedAt time.Time
 }
 
-// todo
+// Serialize converts a user struct to json
 func (u User) Serialize() *[]byte {
 	b, err := json.Marshal(u)
 	if err != nil {
@@ -38,6 +40,3 @@ func (u User) Serialize() *[]byte {
 	}
 	return &b
 }
-
-// todo: Versioning on these models?
-// todo: json models? Wrapper with version on each object?

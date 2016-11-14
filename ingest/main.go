@@ -39,7 +39,7 @@ func main() {
 
 		// Did we get a tweet?
 		if t != nil {
-			batch = append(batch, *t) // todo
+			batch = append(batch, *t)
 		}
 
 		// Store tweets once we've got a batch inmem
