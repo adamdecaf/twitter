@@ -28,7 +28,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	storage := NewKafkaStorage(nil) // todo
+	brokers := strings.Split(os.Getenv("BROKERS_LIST"), ",")
+	storage := NewKafkaStorage(brokers)
 	batch := make([]twitter.Tweet, 0, DefaultStorageBatchSize)
 
 	// Read off tweets forever, die if something panics.
