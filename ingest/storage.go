@@ -2,6 +2,8 @@ package ingest
 
 import (
 	"github.com/adamdecaf/twitter"
+	"github.com/Shopify/sarama"
+	"log"
 )
 
 // An layer for storing tweets. It expects a batch of tweets instead of single tweets
@@ -15,6 +17,9 @@ type kafkaStorage struct {
 	Storage
 
 	Brokers []string
+
+	// Internal methods
+	produder sarama.AsyncProducer
 }
 
 // `NewKafkaStorage`...
