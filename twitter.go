@@ -21,3 +21,4 @@ type User struct {
 }
 
 // todo: Versioning on these models?
+// todo: json models? Wrapper with version on each object?
