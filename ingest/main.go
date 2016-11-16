@@ -4,6 +4,7 @@ import (
 	"github.com/adamdecaf/twitter"
 	"log"
 	"os"
+	"strings"
 )
 
 var (
