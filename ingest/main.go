@@ -8,6 +8,11 @@ import (
 	"strings"
 )
 
+// todo
+// Hook into metrics registry
+// Config.MetricRegistry = (metrics.Registry)
+// From: "github.com/rcrowley/go-metrics"
+
 var (
 	DefaultStorageBatchSize = 100
 )
