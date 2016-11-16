@@ -24,6 +24,15 @@ func (t Tweet) Serialize() *[]byte {
 	return &b
 }
 
+func ReadTweet(b []byte) (Tweet, error) {
+	t := Tweet{}
+	err := json.Unmarshal(b, &t)
+	if err != nil {
+		return Tweet{}, err
+	}
+	return t, nil
+}
+
 // `User` contains information on the account which creates tweets.
 type User struct {
 	Id string
@@ -39,4 +48,13 @@ func (u User) Serialize() *[]byte {
 		return nil
 	}
 	return &b
+}
+
+func ReadUser(b []byte) (User, error) {
+	t := User{}
+	err := json.Unmarshal(b, &t)
+	if err != nil {
+		return User{}, err
+	}
+	return t, nil
 }
