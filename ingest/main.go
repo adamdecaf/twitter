@@ -32,6 +32,7 @@ func main() {
 	brokers := strings.Split(os.Getenv("BROKERS_LIST"), ",")
 	storage := NewKafkaStorage(brokers)
 	batch := make([]twitter.Tweet, 0, DefaultStorageBatchSize)
+	counter := NewCounter("incoming-tweets")
 
 	// Read off tweets forever, die if something panics.
 	for {
@@ -45,6 +46,7 @@ func main() {
 
 		// Store tweets once we've got a batch inmem
 		if len(batch) >= DefaultStorageBatchSize {
+			counter.AddI(len(batch))
 			err := storage.Store(batch)
 			if err != nil {
 				log.Println(err)
