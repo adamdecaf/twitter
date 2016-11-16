@@ -2,6 +2,7 @@ package ingest
 
 import (
 	"github.com/adamdecaf/twitter"
+	"github.com/adamdecaf/twitter/metrics"
 	"log"
 	"os"
 	"strings"
@@ -32,7 +33,7 @@ func main() {
 	brokers := strings.Split(os.Getenv("BROKERS_LIST"), ",")
 	storage := NewKafkaStorage(brokers)
 	batch := make([]twitter.Tweet, 0, DefaultStorageBatchSize)
-	counter := NewCounter("incoming-tweets")
+	counter := metrics.NewCounter("incoming-tweets")
 
 	// Read off tweets forever, die if something panics.
 	for {

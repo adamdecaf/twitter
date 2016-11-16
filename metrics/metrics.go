@@ -1,4 +1,4 @@
-package ingest
+package metrics
 
 import (
 	"github.com/armon/go-metrics"
